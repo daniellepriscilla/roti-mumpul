@@ -1,6 +1,5 @@
 <?php
 
-// Pastikan struktur folder temporary tersedia di environment serverless Vercel (/tmp)
 $storageDirs = [
     '/tmp/storage/app/public',
     '/tmp/storage/framework/cache/data',
@@ -16,5 +15,4 @@ foreach ($storageDirs as $dir) {
     }
 }
 
-// Teruskan request ke Laravel public/index.php
 require __DIR__.'/../public/index.php';
