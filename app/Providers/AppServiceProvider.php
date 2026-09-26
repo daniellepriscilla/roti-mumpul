@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -22,6 +23,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if ($this->app->environment('production')) {
+            URL::forceScheme('https');
+        }
+
         View::composer('layouts.navigation', function ($view): void {
             $view->with('cartCount', Auth::check()
                 ? (int) Cart::where('user_id', Auth::id())->sum('quantity')
